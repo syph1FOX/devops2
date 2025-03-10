@@ -2,11 +2,18 @@ CXX = g++
 CXXFLAGS = -Wall -g
 TARGET = var9
 
-$(TARGET): var9.o
-	$(CXX) $(CXXFLAGS) -o $(TARGET) $(TARGET).o
-	rm $(TARGET).o
+main: $(TARGET).o main.o test.o
+	$(CXX) $(CXXFLAGS) -o ../usr/bin/main main.o $(TARGET).o
+	$(CXX) $(CXXFLAGS) -o ../usr/bin/test test.o $(TARGET).o
 
-var9.o: var9.cpp
-	$(CXX) $(CXXFLAGS) -c $(TARGET).cpp
+$(TARGET).o: 
+	$(CXX) $(CXXFLAGS) -c ../src/$(TARGET).cpp
+
+main.o:
+	$(CXX) $(CXXFLAGS) -c ../src/main.cpp
+	
+test.o:
+	$(CXX) $(CXXFLAGS) -c ../src/test.cpp
+	
 clean:
-	rm -f *.o $(TARGET)
+	rm -f *.o $(TARGET) test 
