@@ -1,0 +1,8 @@
+Package: devops1-main
+Version: 1.0
+Section: unknown
+Priority: optional
+Architecture: amd64
+Maintainer: dos
+Description: nya
+Depends: make, g++
