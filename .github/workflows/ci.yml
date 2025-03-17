@@ -17,7 +17,7 @@ jobs:
 
       - name: Run Makefile
         run: |
-          cd ~/cicd
+          cd ./cicd
           make 
 
   run-test:
@@ -26,7 +26,7 @@ jobs:
     steps:
       - name: Run test
         run: |
-          cd ~/usr/bin
+          cd ./bin
           ./test
           if [ $? -eq 0 ]; then
             echo "::set-output name=status::success"
