@@ -75,7 +75,7 @@ jobs:
           echo "Maintainer: zxc" >> var9/DEBIAN/control
           echo "Description: var9" >> var9/DEBIAN/control
           dpkg-deb --build var9
-          mv var9.deb ./cicd
+        #mv var9.deb ./cicd
 
       - name: Upload .deb package
         uses: actions/upload-artifact@v4
