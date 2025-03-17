@@ -36,6 +36,8 @@ jobs:
         with:
           name: build-output
           path: ./build
+      - name: Make test executable
+        run: chmod +x ./build/bin/test
       - name: Run test
         id: test
         run: |
