@@ -19,14 +19,28 @@ jobs:
         run: |
           cd ./cicd
           make 
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-output
+          path: |  # Upload the generated .exe files for use in the next job
+            *.exe
+            test.exe
 
   run-test:
     runs-on: ubuntu-latest
     needs: run-make  
     steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: build-output
+          path: ./build
       - name: Run test
+        id: test
         run: |
-          ./bin/test
+          cd ./build
+          ./test.exe
           if [ $? -eq 0 ]; then
             echo "::set-output name=status::success"
           else
@@ -39,11 +53,23 @@ jobs:
     needs: run-test  
     if: needs.run-test.outputs.status == 'success'  
     steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: build-output
+          path: ./build
+          
       - name: Install dpkg utilities
         run: sudo apt-get update && sudo apt-get install -y dpkg-dev build-essential
 
       - name: Create .deb package
         run: 
-          dpkg-deb --build 
+          dpkg-deb --build var9
+          
+      - name: Upload .deb package
+        uses: actions/upload-artifact@v3
+        with:
+          name: deb-package
+          path: var9.deb
 
 
