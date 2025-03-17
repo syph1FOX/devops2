@@ -17,7 +17,7 @@ jobs:
 
       - name: Run Makefile
         run: |
-          cd /cicd
+          cd ./cicd
           make 
 
   run-test:
