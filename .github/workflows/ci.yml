@@ -59,12 +59,12 @@ jobs:
     steps:
       - name: Create .deb package
         run: 
-          dpkg-deb --build ../devops2/
+          dpkg-deb --build ../devops2
 
       - name: Upload .deb package
         uses: actions/upload-artifact@v4
         with:
           name: deb-package
-          path: ../devops2/
+          path: ../devops2
 
 
