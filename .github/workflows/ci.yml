@@ -27,9 +27,8 @@ jobs:
       - name: Run test
         id: test
         run: |
-          ls
-          cd ./usr
-          cd ./bin
+          echo ls
+          cd usr/bin
           ./test
           if [ $? -eq 0 ]; then
             echo "::set-output name=status::success"
