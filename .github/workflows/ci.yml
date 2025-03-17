@@ -20,7 +20,7 @@ jobs:
           cd ./cicd
           make 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: build-output
           path: |  # Upload the generated .exe files for use in the next job
@@ -32,7 +32,7 @@ jobs:
     needs: run-make  
     steps:
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: build-output
           path: ./build
@@ -54,7 +54,7 @@ jobs:
     if: needs.run-test.outputs.status == 'success'  
     steps:
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: build-output
           path: ./build
@@ -67,7 +67,7 @@ jobs:
           dpkg-deb --build var9
           
       - name: Upload .deb package
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: deb-package
           path: var9.deb
