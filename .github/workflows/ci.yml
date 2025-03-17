@@ -58,13 +58,23 @@ jobs:
     if: needs.run-test.outputs.status == 'success'
     steps:
       - name: Create .deb package
-        run: 
-          dpkg-deb --build ../devops2
+        run: |
+          mkdir -p var9/DEBIAN
+          mkdir -p var9/usr/bin
+          cp ./build/main var9/usr/bin/main
+          echo "Package: var9" > var9/DEBIAN/control
+          echo "Version: 1.0" >> var9/DEBIAN/control
+          echo "Section: utils" >> var9/DEBIAN/control
+          echo "Priority: optional" >> var9/DEBIAN/control
+          echo "Architecture: all" >> var9/DEBIAN/control
+          echo "Maintainer: zxc" >> var9/DEBIAN/control
+          echo "Description: var9" >> var9/DEBIAN/control
+          dpkg-deb --build var9
 
       - name: Upload .deb package
         uses: actions/upload-artifact@v4
         with:
           name: deb-package
-          path: ../devops2
+          path: var9.deb
 
 
