@@ -57,11 +57,16 @@ jobs:
     needs: run-test  
     if: needs.run-test.outputs.status == 'success'
     steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-output
+          path: ./build
       - name: Create .deb package
         run: |
           mkdir -p var9/DEBIAN
           mkdir -p var9/usr/bin
-          cp ./build/bin/main var9/usr/bin/main
+          cp ./build/bin var9/usr/bin
           echo "Package: var9" > var9/DEBIAN/control
           echo "Version: 1.0" >> var9/DEBIAN/control
           echo "Section: utils" >> var9/DEBIAN/control
@@ -70,11 +75,12 @@ jobs:
           echo "Maintainer: zxc" >> var9/DEBIAN/control
           echo "Description: var9" >> var9/DEBIAN/control
           dpkg-deb --build var9
+          mv var9.deb ./cicd
 
       - name: Upload .deb package
         uses: actions/upload-artifact@v4
         with:
           name: deb-package
-          path: var9.deb
+          path: ./cicd/var9.deb
 
 
