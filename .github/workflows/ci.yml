@@ -26,7 +26,6 @@ jobs:
     steps:
       - name: Run test
         run: |
-          cd ../bin
           ./test
           if [ $? -eq 0 ]; then
             echo "::set-output name=status::success"
