@@ -40,7 +40,7 @@ jobs:
         id: test
         run: |
           cd ./build
-          ./test
+          ./bin/test
           if [ $? -eq 0 ]; then
             echo "::set-output name=status::success"
           else
