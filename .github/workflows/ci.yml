@@ -66,7 +66,7 @@ jobs:
         run: |
           mkdir -p var9/DEBIAN
           mkdir -p var9/usr/bin
-          cp ./build/bin var9/usr/bin
+          cp -r ./build/bin var9/usr/bin
           echo "Package: var9" > var9/DEBIAN/control
           echo "Version: 1.0" >> var9/DEBIAN/control
           echo "Section: utils" >> var9/DEBIAN/control
