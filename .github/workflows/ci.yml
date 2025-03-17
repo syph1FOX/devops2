@@ -23,9 +23,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: build-output
-          path: |  # Upload the generated .exe files for use in the next job
-            *.exe
-            test.exe
+          path: | 
+            ./bin
+            test
 
   run-test:
     runs-on: ubuntu-latest
