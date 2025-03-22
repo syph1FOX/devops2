@@ -90,8 +90,6 @@ jobs:
         with:
           tag_name: devops2
           release_name: Release devops2
-          draft: false
           prerelease: false
-          generate_release_notes: true
 
 
