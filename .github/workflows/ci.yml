@@ -76,7 +76,6 @@ jobs:
           echo "Maintainer: zxc" >> var9/DEBIAN/control
           echo "Description: var9" >> var9/DEBIAN/control
           dpkg-deb --build var9
-        #mv var9.deb ./cicd
 
       - name: Upload .deb package
         uses: actions/upload-artifact@v4
@@ -84,16 +83,20 @@ jobs:
           name: deb-package
           path: var9.deb
           
-      - name: Create GitHub Release
+      - name: Create GitHub Release 
         id: create_release
-        uses: actions/create-release@v1
+        uses: softprops/action-gh-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }} 
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
         with:
-          tag_name: v1.0.0 
-          release_name: Release v1.0.0 
+          tag_name: v1.0.0
+          name: Release v1.0.0
+          body: Automated release
           prerelease: false
-
+          overwrite: true 
+          files: |
+            var9.deb
+        
       - name: Upload .deb Package to Release
         uses: actions/upload-release-asset@v1
         env:
