@@ -84,6 +84,7 @@ jobs:
           path: var9.deb
           
       - name: Create release
+        id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
@@ -91,5 +92,13 @@ jobs:
           tag_name: devops2
           release_name: Release devops2
           prerelease: false
+
+      - name: Upload release
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} 
+          asset_path: ./
+          asset_name: var9
+          asset_content_type: application/gzip 
 
 
