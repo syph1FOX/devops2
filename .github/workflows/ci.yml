@@ -83,22 +83,22 @@ jobs:
           name: deb-package
           path: var9.deb
           
-      - name: Create release
+      - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: devops2
-          release_name: Release devops2
+          tag_name: v1.0.0
+          release_name: Release v1.0.0 
           prerelease: false
 
-      - name: Upload release
+      - name: Upload .deb Package to Release
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} 
-          asset_path: ./
-          asset_name: var9
-          asset_content_type: application/gzip 
+          asset_path: var9.deb 
+          asset_name: var9.deb 
+          asset_content_type: application/vnd.debian.binary-package 
 
 
