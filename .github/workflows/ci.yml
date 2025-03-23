@@ -83,7 +83,7 @@ jobs:
           name: deb-package
           path: var9.deb
           
-      - name: Create GitHub Release 
+      - name: Create and Upload Release 
         id: create_release
         uses: softprops/action-gh-release@v1
         env:
@@ -96,15 +96,3 @@ jobs:
           overwrite: true 
           files: |
             var9.deb
-        
-      - name: Upload .deb Package to Release
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }} 
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} 
-          asset_path: var9.deb 
-          asset_name: var9.deb 
-          asset_content_type: application/vnd.debian.binary-package 
-
-
